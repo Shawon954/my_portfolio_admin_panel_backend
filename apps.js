@@ -3,7 +3,12 @@ const DataBase_Connection = require('./DataBase/database.js');
 const app = express();
 require('dotenv').config();
 const port = process.env.PORT || 3000;
-require('dotenv').config();
+const cors = require('cors');
+
+app.use(cors());
+app.use(express.json());
+
+
 
 app.get('/', (req, res) => {
   res.send('Hello World');
