@@ -14,6 +14,15 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
+
+// All Routes
+
+const LoginRouter = require('./routes/login/login_router.js');
+
+app.use('/api/v1/login', LoginRouter);
+
+
+
 app.listen(port, () => {
   console.log(`Local Server running on port:${port}`);
   DataBase_Connection();
