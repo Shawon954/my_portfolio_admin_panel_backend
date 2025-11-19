@@ -18,8 +18,10 @@ app.get('/', (req, res) => {
 // All Routes
 
 const LoginRouter = require('./routes/login/login_router.js');
+const HomeTitleRoutes = require('./routes/home_title_routes/home_title.js');
 
 app.use('/api/v1/login', LoginRouter);
+app.use('/api/v1/update-home-title',HomeTitleRoutes);
 
 
 
