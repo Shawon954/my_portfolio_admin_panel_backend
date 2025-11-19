@@ -4,5 +4,6 @@ const authMiddleware = require('../../middelware/auth_middelware.js');
 const HomeTitleRoutes = express.Router();
 
 HomeTitleRoutes.put('/:id',authMiddleware,HomeTitleController.createHomeTitle);
+HomeTitleRoutes.get('/', HomeTitleController.getHomeTitle);
 
 module.exports = HomeTitleRoutes;

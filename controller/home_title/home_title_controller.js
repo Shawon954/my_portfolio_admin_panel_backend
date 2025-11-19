@@ -2,7 +2,18 @@ const HomeTitleModel = require("../../model/home_title_model/hometitle");
 
 class HomeTitleController{
 
-static createHomeTitle = async(req, res)=>{
+static getHomeTitle = async(req, res)=>{
+
+  try {
+      const homeInfo = await HomeTitleModel.find();
+      res.status(200).json({status:200,message: 'Data retrieved successfully',data:homeInfo});
+  } catch (error) {
+      res.status(500).json({status:500,message: 'Internal Server Error' });
+  }
+}
+
+
+static createHomeTitle = async(req, res, next)=>{
  const id = req.params.id;
 
   try {
@@ -16,6 +27,7 @@ static createHomeTitle = async(req, res)=>{
         id,req.body,{ new: true }
       );
 
+      next();
  return res.status(200).json({status:200,message: 'Data updated successfully',data:updateData });
 
   }catch (error) {
