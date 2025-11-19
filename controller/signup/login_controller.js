@@ -1,4 +1,5 @@
 const Login = require("../../model/login_model/login_model");
+const jwt = require("jsonwebtoken");
 
 class LoginController {
 
@@ -33,13 +34,17 @@ class LoginController {
             }
 
             // ✅ Login successful
+
+            const token = await jwt.sign({email,_id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'});
+
             return res.status(201).json({
                 status: 201,
                 message: "Login successful",
                 user: {
                     username: user.username,
                     email: user.email
-                }
+                },
+                token: token,
             });
 
         } catch (error) {
