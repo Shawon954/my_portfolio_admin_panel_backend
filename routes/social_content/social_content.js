@@ -8,5 +8,6 @@ SocialRoutes.get('/',SocialContactController.getSocialContacts);
 
 // Create Social Contact
 SocialRoutes.post('/',multer.single('socialIcon'),SocialContactController.createSocialContact);
+SocialRoutes.delete('/:id',SocialContactController.deleteSocialContact);
 
 module.exports = SocialRoutes;

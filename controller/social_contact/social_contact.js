@@ -55,6 +55,19 @@ static createSocialContact = async (req, res,next) => {
 };
 
 
+static deleteSocialContact = async (req, res) => {
+    const  id  = req.params.id;          
+    try {
+       
+
+        await SocialContactModel.findByIdAndDelete(id);     
+
+        return res.status(200).json({ status: 200, message: "Social Contact deleted successfully" });
+    } catch (error) {
+        console.error("Error in deleteSocialContact:", error);
+        return res.status(500).json({ status: 500, message: "Internal Server Error" });
+    }
 };
+}
 
 module.exports = SocialContactController;

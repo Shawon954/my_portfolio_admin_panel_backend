@@ -30,6 +30,7 @@ app.use('/api/v1/get-home-title',HomeTitleRoutes);
 // Social Contact Routes
 app.use('/api/v1/get-social-contacts',SocialRoutes);
 app.use('/api/v1/create-social-contact',SocialRoutes);
+app.use('/api/v1/delete-social-contact',SocialRoutes);
 
 
 
