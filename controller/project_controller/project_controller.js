@@ -2,7 +2,8 @@ const ProjectModel = require("../../model/project_model/project_model");
 const cloudinary = require("../../config/cloudinary/cloudinary");
 
 class ProjectController {
-  static createProject = async (req, res) => {
+ 
+    static createProject = async (req, res) => {
     try {
 
 
