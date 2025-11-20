@@ -40,6 +40,7 @@ app.use('/api/v1/resume', ResumeRoutes);
 
 // Project Routes
 app.use('/api/v1/create-project',ProjectRouters);
+app.use('/api/v1/get-projects',ProjectRouters);
 
 
 
