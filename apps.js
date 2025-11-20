@@ -8,10 +8,11 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
+app.use(express.urlencoded({ extended: true }));
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World');
+  res.send('Hello World'); 
 });
 
 
@@ -20,6 +21,8 @@ app.get('/', (req, res) => {
 const LoginRouter = require('./routes/login/login_router.js');
 const HomeTitleRoutes = require('./routes/home_title_routes/home_title.js');
 const SocialRoutes = require('./routes/social_content/social_content.js');
+const ResumeRoutes = require('./routes/resume_routers/resume_routers.js');
+const ProjectRouters = require('./routes/project_routes/project_routes.js');
 
 app.use('/api/v1/login', LoginRouter);
 
@@ -31,6 +34,12 @@ app.use('/api/v1/get-home-title',HomeTitleRoutes);
 app.use('/api/v1/get-social-contacts',SocialRoutes);
 app.use('/api/v1/create-social-contact',SocialRoutes);
 app.use('/api/v1/delete-social-contact',SocialRoutes);
+
+// Resume Routes
+app.use('/api/v1/resume', ResumeRoutes);
+
+// Project Routes
+app.use('/api/v1/create-project',ProjectRouters);
 
 
 
