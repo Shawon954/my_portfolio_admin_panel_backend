@@ -23,7 +23,10 @@ const HomeTitleRoutes = require('./routes/home_title_routes/home_title.js');
 const SocialRoutes = require('./routes/social_content/social_content.js');
 const ResumeRoutes = require('./routes/resume_routers/resume_routers.js');
 const ProjectRouters = require('./routes/project_routes/project_routes.js');
+const SkillsRouters = require('./routes/skills_routes/skills_routes.js');
 
+
+// Login Routes
 app.use('/api/v1/login', LoginRouter);
 
 // Home Title Routes
@@ -43,6 +46,12 @@ app.use('/api/v1/create-project',ProjectRouters);
 app.use('/api/v1/get-projects',ProjectRouters);
 app.use('/api/v1/update-project',ProjectRouters);
 app.use('/api/v1/delete-project',ProjectRouters);
+
+// Skills Routes
+app.use('/api/v1/create-skill', SkillsRouters); 
+app.use('/api/v1/get-skills', SkillsRouters);
+app.use('/api/v1/delete-skill', SkillsRouters);
+
 
 
 
