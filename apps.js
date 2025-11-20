@@ -25,6 +25,7 @@ const ResumeRoutes = require('./routes/resume_routers/resume_routers.js');
 const ProjectRouters = require('./routes/project_routes/project_routes.js');
 const SkillsRouters = require('./routes/skills_routes/skills_routes.js');
 const EducationRoutes = require('./routes/education_routes/education_routes.js');
+const AboutMeRouter = require('./routes/about_me_router/about_me_router.js');
 
 
 // Login Routes
@@ -58,6 +59,10 @@ app.use('/api/v1/create-education', EducationRoutes);
 app.use('/api/v1/get-educations', EducationRoutes);
 app.use('/api/v1/update-education', EducationRoutes);
 app.use('/api/v1/delete-education', EducationRoutes);
+
+// About Me Routes
+app.use('/api/v1/update-about-me', AboutMeRouter);
+app.use('/api/v1/get-about-me', AboutMeRouter);
 
 
 
