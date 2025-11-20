@@ -75,8 +75,61 @@ class ProjectController {
   };
 
 
-  
+  static updateProject = async (req, res) => {
+    const id = req.params.id;
+   try {
+     const projectId = await ProjectModel.findById(id);
 
-}
+     if(projectId.project_img.cloudinary_id){
+        await cloudinary.uploader.destroy(projectId.project_img.cloudinary_id);
+     }
+
+     const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "projects_images",
+     });
+        const updateBody = {    
+        ...req.body,
+        project_img: result.secure_url,
+        cloudinary_id: result.public_id,
+        
+        };
+    
+      const updateProject = await ProjectModel.findByIdAndUpdate(id, updateBody, { new: true });
+
+    return res.status(200).json({
+        status:200,
+        message:"Project updated successfully",
+        data:updateProject
+    });
+
+   } catch (error) {
+     return res.status(500).json({
+       status: 500,
+       message: "Internal Server Error",
+       error: error.message,
+     });    
+   }    
+  };
+
+
+  static deleteProject = async (req, res) => {
+    const id = req.params.id;       
+    try {
+    await ProjectModel.findByIdAndDelete(id,req.body,{new:true});
+      return res.status(200).json({
+        status: 200,
+        message: "Project deleted successfully",
+      });
+
+    }
+    catch (error) {
+      return res.status(500).json({
+        status: 500,
+        message: "Internal Server Error",
+        error: error.message,
+      });
+    }
+  };
+};
 
 module.exports = ProjectController;

@@ -6,6 +6,8 @@ const ProjectRouters = express.Router();
 
 
 ProjectRouters.post("/",authMiddleware,multer.single('project_img'),ProjectController.createProject);
-ProjectRouters.get("/",ProjectController.getProjects);
+ProjectRouters.get("/",authMiddleware,ProjectController.getProjects);
+ProjectRouters.put("/:id",authMiddleware,multer.single('project_img'),ProjectController.updateProject);
+ProjectRouters.delete("/:id",authMiddleware,ProjectController.deleteProject);   
 
 module.exports = ProjectRouters;

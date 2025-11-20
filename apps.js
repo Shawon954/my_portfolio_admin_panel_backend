@@ -41,6 +41,8 @@ app.use('/api/v1/resume', ResumeRoutes);
 // Project Routes
 app.use('/api/v1/create-project',ProjectRouters);
 app.use('/api/v1/get-projects',ProjectRouters);
+app.use('/api/v1/update-project',ProjectRouters);
+app.use('/api/v1/delete-project',ProjectRouters);
 
 
 
