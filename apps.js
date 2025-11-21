@@ -26,6 +26,7 @@ const ProjectRouters = require('./routes/project_routes/project_routes.js');
 const SkillsRouters = require('./routes/skills_routes/skills_routes.js');
 const EducationRoutes = require('./routes/education_routes/education_routes.js');
 const AboutMeRouter = require('./routes/about_me_router/about_me_router.js');
+const AcivemenetRouters = require('./routes/acivement_routes/acivement_routes.js');
 
 
 // Login Routes
@@ -62,7 +63,12 @@ app.use('/api/v1/delete-education', EducationRoutes);
 
 // About Me Routes
 app.use('/api/v1/update-about-me', AboutMeRouter);
-app.use('/api/v1/get-about-me', AboutMeRouter);
+app.use('/api/v1/get-about-me', AboutMeRouter); 
+
+// Acivemenet Routes
+app.use('/api/v1/create-acivemenets', AcivemenetRouters);
+app.use('/api/v1/get-acivemenet', AcivemenetRouters);
+app.use('/api/v1/delete-acivemenet', AcivemenetRouters);
 
 
 
