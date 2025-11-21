@@ -28,6 +28,7 @@ const EducationRoutes = require('./routes/education_routes/education_routes.js')
 const AboutMeRouter = require('./routes/about_me_router/about_me_router.js');
 const AcivemenetRouters = require('./routes/acivement_routes/acivement_routes.js');
 const ContactRoutes = require('./routes/contact_routes/contact_routes.js');
+const OwnerImageRoutes = require('./routes/owner_image_routes/owner_image_routes.js');
 
 // Login Routes
 app.use('/api/v1/login', LoginRouter);
@@ -74,6 +75,10 @@ app.use('/api/v1/delete-acivemenet', AcivemenetRouters);
 app.use('/api/v1/create-contacts', ContactRoutes);
 app.use('/api/v1/get-contacts', ContactRoutes);
 app.use('/api/v1/delete-contact', ContactRoutes);
+
+// OwnerImage 
+app.use('/api/v1/update_ownerimage',OwnerImageRoutes);
+ app.use('/api/v1/get-ownerimage',OwnerImageRoutes);
 
 
 
