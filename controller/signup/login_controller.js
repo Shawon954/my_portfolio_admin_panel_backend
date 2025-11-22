@@ -16,8 +16,9 @@ class LoginController {
             }
 
            
-            const user = await Login.findOne({ email: email });
+            const user = await Login.findOne( email );
 
+            
             if (!user) {
                 return res.status(404).json({
                     status: 404,
