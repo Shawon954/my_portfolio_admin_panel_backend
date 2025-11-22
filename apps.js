@@ -11,9 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.get('/', (req, res) => {
-  res.send('Hello World'); 
-});
+
 
 
 // All Routes
@@ -84,6 +82,9 @@ app.use('/api/v1/update_ownerimage',OwnerImageRoutes);
 
 
 
+app.get('/', (req, res) => {
+  res.send('Hello World'); 
+});
 
 app.listen(port, () => {
   console.log(`Local Server running on port:${port}`);
