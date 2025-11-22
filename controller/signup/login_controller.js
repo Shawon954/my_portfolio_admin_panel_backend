@@ -39,11 +39,8 @@ class LoginController {
 
             return res.status(201).json({
                 status: 201,
-                message: "Login successful",
-                user: {
-                    username: user.username,
-                    email: user.email
-                },
+                message: "Login successfully",
+                user,
                 token: token,
             });
 

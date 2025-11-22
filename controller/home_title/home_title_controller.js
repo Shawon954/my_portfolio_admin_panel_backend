@@ -13,7 +13,7 @@ static getHomeTitle = async(req, res)=>{
 }
 
 
-static createHomeTitle = async(req, res, next)=>{
+static createHomeTitle = async(req, res,)=>{
  const id = req.params.id;
 
   try {
@@ -27,7 +27,7 @@ static createHomeTitle = async(req, res, next)=>{
         id,req.body,{ new: true }
       );
 
-      next();
+
  return res.status(200).json({status:200,message: 'Data updated successfully',data:updateData });
 
   }catch (error) {
