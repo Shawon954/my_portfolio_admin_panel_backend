@@ -83,7 +83,7 @@ app.use('/api/v1/update_ownerimage',OwnerImageRoutes);
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World'); 
+  res.send('My Portfolio Admin Panel'); 
 });
 
 app.listen(port, () => {

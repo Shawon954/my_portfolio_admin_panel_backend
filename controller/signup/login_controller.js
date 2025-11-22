@@ -16,9 +16,7 @@ class LoginController {
             }
 
            
-            const user = await Login.findOne( email );
-
-            
+            const user = await Login.findOne({email:email});
             if (!user) {
                 return res.status(404).json({
                     status: 404,
@@ -33,8 +31,6 @@ class LoginController {
                     message: "Incorrect password"
                 });
             }
-
-            // ✅ Login successful
 
             const token = await jwt.sign({email,_id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'});
 
