@@ -2,10 +2,11 @@ const express = require('express');
 const ResumeRoutes = express.Router();
 
 const ResumeController = require('../../controller/resume_controller/resume_controller.js');
-const uploadPDF = require('../../config/pdf_multer/pdf_multer.js');
+const multer = require('../../config/pdf_multer/pdf_multer.js');
 
 
 // Update Resume Route
-ResumeRoutes.put("/:id", uploadPDF.single("resume"), ResumeController.updateResume);
+ResumeRoutes.put("/:id", multer.single("resume"), ResumeController.updateResume);
+ResumeRoutes.get("/",ResumeController.getResume);
 module.exports = ResumeRoutes;
 

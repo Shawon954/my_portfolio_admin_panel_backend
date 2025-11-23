@@ -1,66 +1,58 @@
-const ResumeModel = require("../../model/resume_model/resume_model");
-const cloudinary = require("../../config/cloudinary/cloudinary");
+const ResumeModel = require("../../model/resume_model/resume_model.js");
+const cloudinary = require("../../config/cloudinary/cloudinary.js");
+const fs = require("fs");
+
 
 class ResumeController {
+
+  static getResume = async(req,res)=>{
+ try {
+        const resume = await ResumeModel.find();
+        return res.status(200).json({ status:200,message: 'Resume records fetched successfully', data: resume });
+    } catch (error) {
+        return res.status(500).json({ status:500,message: 'Internal Server Error', error: error.message });
+    }
+  };
 
   static updateResume = async (req, res) => {
     try {
       const id = req.params.id;
 
-      if (!req.file) {
-        return res.status(400).json({
-          status: 400,
-          message: "Please upload a PDF file"
-        });
-      }
+      if (!req.file) return res.status(400).json({ message: "Upload a PDF file" });
 
-      // Find existing resume
-      const resumeFind = await ResumeModel.findById(id);
+      const resume = await ResumeModel.findById(id);
+      if (!resume) return res.status(404).json({ message: "Resume not found" });
 
-      if (!resumeFind) {
-        return res.status(404).json({
-          status: 404,
-          message: "Resume Not Found"
-        });
-      }
+      // Delete old file from Cloudinary
+      if (resume.cloudinary_id) await cloudinary.uploader.destroy(resume.cloudinary_id);
 
-      // Delete old PDF from cloudinary
-      if (resumeFind.cloudinary_id) {
-        await cloudinary.uploader.destroy(resumeFind.cloudinary_id, {
-          resource_type: "raw"
-        });
-      }
-
-      // Upload new PDF to cloudinary
+      // Upload new PDF
       const uploaded = await cloudinary.uploader.upload(req.file.path, {
-        folder: "resume",
-        resource_type: "raw"
+        resource_type: "raw",
+        folder: "resume"
       });
 
-      const updatedResume = {
+      // Delete local temp file
+      fs.unlinkSync(req.file.path);
+
+      // Update DB
+      const updated = await ResumeModel.findByIdAndUpdate(id, {
         url: uploaded.secure_url,
-        cloudinary_id: uploaded.public_id,
-      };
+        cloudinary_id: uploaded.public_id
+      }, { new: true });
 
-      const updated = await ResumeModel.findByIdAndUpdate(id, updatedResume, {
-        new: true
-      });
-
-      return res.status(200).json({
-        status: 200,
-        message: "Resume Updated Successfully",
-        data: updated
-      });
+      res.status(200).json({ message: "Resume updated successfully", data: updated });
 
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        message: "Server Error",
-        error: error.message
-      });
+      res.status(500).json({ message: error.message });
     }
   };
 
-}
+
+
+};
+
 
 module.exports = ResumeController;
+
+

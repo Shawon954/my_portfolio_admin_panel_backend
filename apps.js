@@ -4,13 +4,20 @@ const app = express();
 require('dotenv').config();
 const port = process.env.PORT || 3000;
 const cors = require('cors');
+const fs = require("fs");
+const path = require("path");
+
 
 app.use(cors());
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
+const uploadPath = path.join(__dirname, "../../uploads");
 
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath, { recursive: true });
+}
 
 
 
@@ -41,7 +48,8 @@ app.use('/api/v1/create-social-contact',SocialRoutes);
 app.use('/api/v1/delete-social-contact',SocialRoutes);
 
 // Resume Routes
-app.use('/api/v1/resume', ResumeRoutes);
+app.use('/api/v1/update-resume', ResumeRoutes);
+app.use('/api/v1/get-resume', ResumeRoutes);
 
 // Project Routes
 app.use('/api/v1/create-project',ProjectRouters);

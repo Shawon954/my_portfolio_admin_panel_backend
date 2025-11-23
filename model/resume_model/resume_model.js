@@ -10,7 +10,6 @@ const ResumeSchema = new mongoose.Schema({
 
     cloudinary_id: {
     type: String,
-    required: true,
     trim: true,
     }
 },{
