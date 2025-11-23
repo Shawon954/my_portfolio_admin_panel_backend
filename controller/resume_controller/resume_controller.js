@@ -24,7 +24,9 @@ class ResumeController {
       if (!resume) return res.status(404).json({ message: "Resume not found" });
 
       // Delete old file from Cloudinary
-      if (resume.cloudinary_id) await cloudinary.uploader.destroy(resume.cloudinary_id);
+      if (resume.cloudinary_id) await cloudinary.uploader.destroy(resume.cloudinary_id,{
+         resource_type: "raw"
+      });
 
       // Upload new PDF
       const uploaded = await cloudinary.uploader.upload(req.file.path, {
