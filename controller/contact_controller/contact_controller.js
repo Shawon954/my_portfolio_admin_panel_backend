@@ -49,9 +49,11 @@ class ContactController {
     };
 
     static deleteContact = async (req, res) => {
-        const id = req.query.id;
+        const id = req.params.id;
+
         try{
             await ContactModel.findByIdAndDelete(id,req.body,{new:true});
+            
 
             return res.status(200).json({ status: 200, success: true, message: "Contact Deleted Successfully" });
         }catch (error) {
