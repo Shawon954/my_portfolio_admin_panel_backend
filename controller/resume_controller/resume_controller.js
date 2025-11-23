@@ -15,7 +15,7 @@ class ResumeController {
   };
 
   static updateResume = async (req, res) => {
-    try {
+  //  try {
       const id = req.params.id;
 
       if (!req.file) return res.status(400).json({ message: "Upload a PDF file" });
@@ -45,9 +45,9 @@ class ResumeController {
 
       res.status(200).json({ message: "Resume updated successfully", data: updated });
 
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
+    // } catch (error) {
+    //   res.status(500).json({ message: error.message });
+    // }
   };
 
 
