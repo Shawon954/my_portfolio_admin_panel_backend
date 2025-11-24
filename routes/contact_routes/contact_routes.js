@@ -8,7 +8,7 @@ const authMiddleware = require('../../middelware/auth_middelware.js');
 
 
 ContactRoutes.post('/',authMiddleware, multer.single('contact_image'), ContactController.createContact);
-ContactRoutes.get('/', authMiddleware,ContactController.getContacts);
+ContactRoutes.get('/',ContactController.getContacts);
 ContactRoutes.delete('/:id',authMiddleware ,ContactController.deleteContact);
 
 module.exports = ContactRoutes;

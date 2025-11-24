@@ -8,7 +8,7 @@ const authMiddleware = require('../../middelware/auth_middelware.js');
 // Create Acivemenet
 AcivemenentRouters.post('/',authMiddleware ,multer.single('acivement_image'), AcivemenetController.createAcivemenet);
 // Get Acivemenets
-AcivemenentRouters.get('/',authMiddleware ,AcivemenetController.getAcivemenets);
+AcivemenentRouters.get('/',AcivemenetController.getAcivemenets);
 // Delete Acivemenet
 AcivemenentRouters.delete('/:id',authMiddleware , AcivemenetController.deleteAcivemenet);
 

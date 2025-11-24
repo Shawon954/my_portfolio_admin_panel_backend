@@ -6,7 +6,7 @@ const authMiddleware = require('../../middelware/auth_middelware.js');
 
 
 EducationRouter.post('/', authMiddleware,multer.single('certificate_image'), EducationController.createEducation);
-EducationRouter.get('/',authMiddleware ,EducationController.getEducations);
+EducationRouter.get('/' ,EducationController.getEducations);
 EducationRouter.put('/:id',authMiddleware ,multer.single('certificate_image'), EducationController.updateEducation);
 EducationRouter.delete('/:id',authMiddleware ,EducationController.deleteEducation);
 
