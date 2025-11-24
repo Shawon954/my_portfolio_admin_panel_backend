@@ -6,6 +6,6 @@ const AboutMeRouter = express.Router();
 // Update About Me Title
 AboutMeRouter.put('/:id',authMiddleware, AboutMeController.updateAboutMe);
 // Get About Me Data
-AboutMeRouter.get('/', authMiddleware,AboutMeController.getAboutMe);
+AboutMeRouter.get('/',AboutMeController.getAboutMe);
 
 module.exports = AboutMeRouter;
