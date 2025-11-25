@@ -18,7 +18,7 @@ class EmailController {
       const mailOptions = {
         from: process.env.USER_EMAIL,
         to: email,
-        subject: `Name:${name}`,
+        subject: name,
         text: `Message: ${message}\nPhone: ${phone}`,
       };
 
