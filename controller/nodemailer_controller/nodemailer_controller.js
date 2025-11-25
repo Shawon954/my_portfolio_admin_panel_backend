@@ -3,70 +3,53 @@ require("dotenv").config();
 
 class EmailController {
   static createEmail = async (req, res) => {
+    try {
+      console.log("BODY RECEIVED:", req.body);
 
-      if (req.method !== "POST") {
-    return res.status(405).json({
-      success: false,
-      message: "Only POST allowed",
-    });
-  }
+      const { name, email, phone, message } = req.body;
 
-    console.log("BODY:", req.body); // debug
+      if (!name || !email || !phone || !message) {
+        return res.status(400).json({
+          success: false,
+          message: "All fields required: name, email, phone, message",
+        });
+      }
 
-    if (!req.body || Object.keys(req.body).length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: "EMPTY BODY RECEIVED",
-      });
-    }
-
-    const { email, name, message, phone } = req.body;
-
-    if (!email || !name || !message || !phone) {
-      return res.status(400).json({
-        success: false,
-        message: "Missing required fields",
-      });
-    }
-
-   // try {
       const transporter = nodemailer.createTransport({
         service: "gmail",
-         host: "smtp.gmail.com",
-         port: 465,
-         secure: true,
         auth: {
           user: process.env.USER_EMAIL,
           pass: process.env.USER_PASSWORD,
         },
-        tls: {
-       rejectUnauthorized: false,
-  },
-        connectionTimeout: 10000
       });
 
       const mailOptions = {
-        from: 'shawoncse954@gmail.com',
-        to: email,
-        subject: name,
-        text: `Message: ${message}\nPhone: ${phone}`,
+        from: `"Portfolio Message" <${process.env.USER_EMAIL}>`,
+        to: process.env.USER_EMAIL,
+        subject: `New Message from ${name}`,
+        html: `
+          <h2>New Contact Message</h2>
+          <p><b>Name:</b> ${name}</p>
+          <p><b>Email:</b> ${email}</p>
+          <p><b>Phone:</b> ${phone}</p>
+          <p><b>Message:</b> ${message}</p>
+        `,
       };
 
       await transporter.sendMail(mailOptions);
 
       return res.status(200).json({
-        status:200,
         success: true,
-        message: "Email Sent Successfully",
+        message: "Email sent successfully!",
       });
-    // } catch (error) {
-    //   return res.status(500).json({
-    //     status:500,
-    //     success: false,
-    //     message: "Mail Sending Failed",
-    //     error: error.message,
-    //   });
-    // }
+    } catch (error) {
+      console.log("EMAIL ERROR:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to send email",
+        error: error.message,
+      });
+    }
   };
 }
 
