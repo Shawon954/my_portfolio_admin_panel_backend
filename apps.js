@@ -34,6 +34,7 @@ const AboutMeRouter = require('./routes/about_me_router/about_me_router.js');
 const AcivemenetRouters = require('./routes/acivement_routes/acivement_routes.js');
 const ContactRoutes = require('./routes/contact_routes/contact_routes.js');
 const OwnerImageRoutes = require('./routes/owner_image_routes/owner_image_routes.js');
+const EmailRoutes = require('./routes/nodemailer_routes/nodemailer_routes.js');
 
 // Login Routes
 app.use('/api/v1/login', LoginRouter);
@@ -86,7 +87,8 @@ app.use('/api/v1/delete-contact', ContactRoutes);
 app.use('/api/v1/update_ownerimage',OwnerImageRoutes);
  app.use('/api/v1/get-ownerimage',OwnerImageRoutes);
 
-
+// Email 
+app.use('/api/v1/send-mail',EmailRoutes);
 
 
 
