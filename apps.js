@@ -1,5 +1,6 @@
 const express = require('express');
 const DataBase_Connection = require('./DataBase/database.js');
+const bodyParser = require('body-parser');
 const app = express();
 require('dotenv').config();
 const port = process.env.PORT || 3000;
@@ -12,6 +13,12 @@ app.use(cors());
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
+
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 const uploadPath = path.join(__dirname, "../../uploads");
 
