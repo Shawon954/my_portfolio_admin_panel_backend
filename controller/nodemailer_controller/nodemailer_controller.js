@@ -10,7 +10,7 @@ class EmailController {
       message: "Only POST allowed",
     });
   }
-  
+
     console.log("BODY:", req.body); // debug
 
     if (!req.body || Object.keys(req.body).length === 0) {
@@ -32,14 +32,21 @@ class EmailController {
    // try {
       const transporter = nodemailer.createTransport({
         service: "gmail",
+         host: "smtp.gmail.com",
+         port: 465,
+         secure: true,
         auth: {
           user: process.env.USER_EMAIL,
           pass: process.env.USER_PASSWORD,
         },
+        tls: {
+       rejectUnauthorized: false,
+  },
+        connectionTimeout: 10000
       });
 
       const mailOptions = {
-        from: process.env.USER_EMAIL,
+        from: 'shawoncse954@gmail.com',
         to: email,
         subject: name,
         text: `Message: ${message}\nPhone: ${phone}`,
