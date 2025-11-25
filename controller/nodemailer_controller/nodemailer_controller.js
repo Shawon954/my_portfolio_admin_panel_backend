@@ -6,7 +6,7 @@ class EmailController {
   static createEmail = async (req, res) => {
     const { email, name, message,phone } = req.body;
 
-    try {
+  //  try {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -32,14 +32,14 @@ class EmailController {
        
       });
 
-    } catch (error) {
-      return res.status(500).json({
-        status: 500,
-         success:false,
-        message: "Mail Sending Failed",
-        error: error.message
-      });
-    }
+    // } catch (error) {
+    //   return res.status(500).json({
+    //     status: 500,
+    //      success:false,
+    //     message: "Mail Sending Failed",
+    //     error: error.message
+    //   });
+    // }
   };
 
 }
