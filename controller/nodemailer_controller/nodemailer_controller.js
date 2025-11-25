@@ -21,7 +21,7 @@ class EmailController {
       });
     }
 
-    try {
+   // try {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -44,14 +44,14 @@ class EmailController {
         success: true,
         message: "Email Sent Successfully",
       });
-    } catch (error) {
-      return res.status(500).json({
-        status:500,
-        success: false,
-        message: "Mail Sending Failed",
-        error: error.message,
-      });
-    }
+    // } catch (error) {
+    //   return res.status(500).json({
+    //     status:500,
+    //     success: false,
+    //     message: "Mail Sending Failed",
+    //     error: error.message,
+    //   });
+    // }
   };
 }
 
