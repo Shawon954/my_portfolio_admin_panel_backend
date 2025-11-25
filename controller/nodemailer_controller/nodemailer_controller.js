@@ -3,6 +3,14 @@ require("dotenv").config();
 
 class EmailController {
   static createEmail = async (req, res) => {
+
+      if (req.method !== "POST") {
+    return res.status(405).json({
+      success: false,
+      message: "Only POST allowed",
+    });
+  }
+  
     console.log("BODY:", req.body); // debug
 
     if (!req.body || Object.keys(req.body).length === 0) {
