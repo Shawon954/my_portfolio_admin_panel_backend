@@ -1,56 +1,89 @@
-const nodemailer = require("nodemailer");
-require("dotenv").config();
+const EmailModel = require("../../model/email_model/email_model");
+
+
 
 class EmailController {
   static createEmail = async (req, res) => {
     try {
-      console.log("BODY RECEIVED:", req.body);
+   
+      const {name,email,phone,message} =req.body;
 
-      const { name, email, phone, message } = req.body;
+       const  sendEmail = await EmailModel.create({
+        name,
+        email,
+        phone,
+        message,
+       });    
+      
+       const savemail = await sendEmail.save();
 
-      if (!name || !email || !phone || !message) {
-        return res.status(400).json({
-          success: false,
-          message: "All fields required: name, email, phone, message",
-        });
-      }
-
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.USER_EMAIL,
-          pass: process.env.USER_PASSWORD,
-        },
-      });
-
-      const mailOptions = {
-        from: `"Portfolio Message" <${process.env.USER_EMAIL}>`,
-        to: process.env.USER_EMAIL,
-        subject: `New Message from ${name}`,
-        html: `
-          <h2>New Contact Message</h2>
-          <p><b>Name:</b> ${name}</p>
-          <p><b>Email:</b> ${email}</p>
-          <p><b>Phone:</b> ${phone}</p>
-          <p><b>Message:</b> ${message}</p>
-        `,
-      };
-
-      await transporter.sendMail(mailOptions);
-
-      return res.status(200).json({
+        return res.status(201).json({
+          status:201,
         success: true,
-        message: "Email sent successfully!",
+        message: "Email sending successfully",
+        data: savemail,
       });
+
     } catch (error) {
-      console.log("EMAIL ERROR:", error);
       return res.status(500).json({
+        status:500,
         success: false,
         message: "Failed to send email",
         error: error.message,
       });
     }
   };
+
+
+  static getEmail = async(req,res)=>{
+     try {
+   
+      const mail = await EmailModel.find();
+     
+        return res.status(200).json({
+          status:200,
+        success: true,
+        message: "Email sending successfully",
+        data: mail,
+      });
+
+    } catch (error) {
+      return res.status(500).json({
+        status:500,
+        success: false,
+        
+        message: "Internal Server Error",
+        error: error.message,
+      });
+    }
+  };
+
+
+    static deleteMail = async(req,res)=>{
+      
+      const id = req.params.id
+      
+      try {
+
+    await EmailModel.findByIdAndDelete(id,req.body,{new:true});
+     
+        return res.status(200).json({
+          status:200,
+        success: true,
+        message: "Delete email successfully",
+       
+      });
+
+    } catch (error) {
+      return res.status(500).json({
+        status:500,
+        success: false,
+        message: "Internal Server Error",
+        error: error.message,
+      });
+    }
+    };
+
 }
 
 module.exports = EmailController;

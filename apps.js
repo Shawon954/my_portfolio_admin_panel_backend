@@ -95,6 +95,10 @@ app.use('/api/v1/update_ownerimage',OwnerImageRoutes);
 
 // Email 
 app.use('/api/v1/send-mail',EmailRoutes);
+app.use('/api/v1/get-mail',EmailRoutes);
+app.use('/api/v1/delete-mail',EmailRoutes);
+
+
 
 
 
